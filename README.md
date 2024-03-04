@@ -1,51 +1,57 @@
-# gudlift-registration
+# Project_LitReviews
+Projet réalisé dans le cadre de ma formation OpenClassrooms Développeur d'Applications Python.  
+Il s'agit d'une application web réalisée avec flask pour une société fictive, GÜDLFT.  
+L'application est un site permettant de reserver des places de compétitions pour des clubs.
 
-1. Why
+## Fonctionnalités
 
-
-    This is a proof of concept (POC) project to show a light-weight version of our competition booking platform. The aim is the keep things as light as possible, and use feedback from the users to iterate.
-
-2. Getting Started
-
-    This project uses the following technologies:
-
-    * Python v3.x+
-
-    * [Flask](https://flask.palletsprojects.com/en/1.1.x/)
-
-        Whereas Django does a lot of things for us out of the box, Flask allows us to add only what we need. 
-     
-
-    * [Virtual environment](https://virtualenv.pypa.io/en/stable/installation.html)
-
-        This ensures you'll be able to install the correct packages without interfering with Python on your machine.
-
-        Before you begin, please ensure you have this installed globally. 
+* Inscription / connexion.
+* Consulter son solde de places.
+* Reserver des places dans une compétition.
 
 
-3. Installation
+## Installation & lancement
 
-    - After cloning, change into the directory and type <code>virtualenv .</code>. This will then set up a a virtual python environment within that directory.
+Commencez tout d'abord par installer Python.  
+Lancez ensuite la console, placez vous dans le dossier de votre choix :
+ - cd"Nom_du_dossier"
 
-    - Next, type <code>source bin/activate</code>. You should see that your command prompt has changed to the name of the folder. This means that you can install packages in here without affecting affecting files outside. To deactivate, type <code>deactivate</code>
+ Puis clonez ce repository dans le dossier de votre choix:
+- git clone https://github.com/Evan-Snd/PROJECT_11_OC.git
 
-    - Rather than hunting around for the packages you need, you can install in one step. Type <code>pip install -r requirements.txt</code>. This will install all the packages listed in the respective file. If you install a package, make sure others know by updating the requirements.txt file. An easy way to do this is <code>pip freeze > requirements.txt</code>
+Placez vous dans le dossier P9_sinda_evan :
+ - cd P9_sinda_evan
 
-    - Flask requires that you set an environmental variable to the python file. However you do that, you'll want to set the file to be <code>server.py</code>. Check [here](https://flask.palletsprojects.com/en/1.1.x/quickstart/#a-minimal-application) for more details
+Puis créez un nouvel environnement virtuel si cela n'est pas déja fait:
+ - python -m venv env
 
-    - You should now be ready to test the application. In the directory, type either <code>flask run</code> or <code>python -m flask run</code>. The app should respond with an address you should be able to go to using your browser.
+Ensuite, activez cet environnement
+Windows:
+ - env\scripts\activate.bat
 
-4. Current Setup
+Linux:
+ - source env/bin/activate
 
-    The app is powered by [JSON files](https://www.tutorialspoint.com/json/json_quick_guide.htm). This is to get around having a DB until we actually need one. The main ones are:
-     
-    * competitions.json - list of competitions
-    * clubs.json - list of clubs with relevant information. You can look here to see what email addresses the app will accept for login.
+Installez ensuite les packages requis:
+ - pip install -r requirements.txt
 
-5. Testing
+Il ne vous reste plus qu'à lancer le serveur
+Windows:
+- $env:FLASK_APP = "server.py"
+- flask run
 
-    You are free to use whatever testing framework you like-the main thing is that you can show what tests you are using.
+Linux :
+- export FLASK_APP=server.py
+- flask run
 
-    We also like to show how well we're testing, so there's a module called 
-    [coverage](https://coverage.readthedocs.io/en/coverage-5.1/) you should add to your project.
+Vous pouvez ensuite utiliser l'applicaton à l'adresse suivante:
+ - http://127.0.0.1:5000
+
+Il existe déja trois utilisateurs sur le site :
+- john@simplylift.co
+- admin@irontemple.com"
+- kate@shelifts.co.uk"
+
+
+
 
