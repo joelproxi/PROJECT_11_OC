@@ -12,5 +12,22 @@
         <input type="email" name="email" id=""/>
         <button type="submit">Enter</button>
     </form>
+    {% with messages = get_flashed_messages()%}
+        {% if messages %}
+            <ul>
+           {% for message in messages %}
+                <li>{{message}}</li>
+            {% endfor %}
+           </ul>
+        {% endif%}
+    {%endwith%}
+    <table border=1 width="350" height="200">
+        {% for club in clubs %}
+            <tr>
+            <td> Club : {{club['name']}}</td>
+            <td> Nbr de points : {{club['points']}}</td>
+            </tr>
+        {% endfor %}
+    </table>
 </body>
 </html>
