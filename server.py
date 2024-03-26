@@ -51,6 +51,9 @@ def book(competition,club):
             print('else')
             flash("Something went wrong-please try again")
             return render_template('welcome.html', club=club, competitions=competitions)
+    else:
+        flash("Cette compétition n'est plus valide")
+        return render_template('welcome.html', club=club, competitions=competitions)
 
 
 @app.route('/purchasePlaces',methods=['POST'])
