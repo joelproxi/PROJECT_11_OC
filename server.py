@@ -34,11 +34,19 @@ def showSummary():
 def book(competition,club):
     foundClub = [c for c in clubs if c['name'] == club][0]
     foundCompetition = [c for c in competitions if c['name'] == competition][0]
-    if foundClub and foundCompetition:
-        return render_template('booking.html',club=foundClub,competition=foundCompetition)
-    else:
-        flash("Something went wrong-please try again")
-        return render_template('welcome.html', club=club, competitions=competitions)
+    date = datetime.now()
+    date_str = date.strftime("%Y-%m-%d %H:%M:%S")
+    print(date_str)
+    dateCompetition = foundCompetition['date']
+    print(dateCompetition)
+    print(competitions)
+    if date_str < dateCompetition :
+        if foundClub and foundCompetition:
+            return render_template('booking.html',club=foundClub,competition=foundCompetition)
+        else:
+            print('else')
+            flash("Something went wrong-please try again")
+            return render_template('welcome.html', club=club, competitions=competitions)
 
 
 @app.route('/purchasePlaces',methods=['POST'])
