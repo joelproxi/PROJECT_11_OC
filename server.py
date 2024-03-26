@@ -1,4 +1,3 @@
-from datetime import datetime
 import json
 from flask import Flask,render_template,request,redirect,flash,url_for
 
@@ -23,40 +22,23 @@ clubs = loadClubs()
 
 @app.route('/')
 def index():
-    return render_template('index.html', clubs=clubs)
-
+    return render_template('index.html')
 
 @app.route('/showSummary',methods=['POST'])
 def showSummary():
-    try:
-        club = [club for club in clubs if club['email'] == request.form['email']][0]
-        return render_template('welcome.html',club=club,competitions=competitions)
-    except IndexError:
-        flash("Sorry, that email wasn't found.")
-        return render_template('index.html'), 401
+    club = [club for club in clubs if club['email'] == request.form['email']][0]
+    return render_template('welcome.html',club=club,competitions=competitions)
 
 
 @app.route('/book/<competition>/<club>')
 def book(competition,club):
     foundClub = [c for c in clubs if c['name'] == club][0]
     foundCompetition = [c for c in competitions if c['name'] == competition][0]
-    date = datetime.now()
-    date_str = date.strftime("%Y-%m-%d %H:%M:%S")
-    print(date_str)
-    dateCompetition = foundCompetition['date']
-    print(dateCompetition)
-    print(competitions)
-    if date_str < dateCompetition :
-        if foundClub and foundCompetition:
-            return render_template('booking.html',club=foundClub,competition=foundCompetition)
-        else:
-            print('else')
-            flash("Something went wrong-please try again")
-            return render_template('welcome.html', club=club, competitions=competitions)
+    if foundClub and foundCompetition:
+        return render_template('booking.html',club=foundClub,competition=foundCompetition)
     else:
-        flash("Cette compétition n'est plus valide")
+        flash("Something went wrong-please try again")
         return render_template('welcome.html', club=club, competitions=competitions)
-
 
 
 @app.route('/purchasePlaces',methods=['POST'])
@@ -64,32 +46,8 @@ def purchasePlaces():
     competition = [c for c in competitions if c['name'] == request.form['competition']][0]
     club = [c for c in clubs if c['name'] == request.form['club']][0]
     placesRequired = int(request.form['places'])
-    placesAvailable = int(competition['numberOfPlaces'])
-    clubPoints = int(club['points'])
-    while True :
-        try :
-            placesRequired = int(request.form['places'])
-        except ValueError:
-            flash("You can only enter number")
-            break
-        if placesRequired <= 0 :
-            flash("Then number of places must be greather than 0")
-            break
-        if placesRequired > clubPoints:
-            flash("You can't have much places than ...")
-            break
-        if placesRequired > placesAvailable :
-            flash("You can't have much places than available")
-            break
-        if placesRequired > 12 :
-            flash("You can't have much than 12 places")
-            break
-        if placesRequired <= placesAvailable :
-            competition['numberOfPlaces'] = int(competition['numberOfPlaces'])-placesRequired
-            clubPoints = clubPoints - placesRequired
-            club['points'] = str(clubPoints)
-            flash('Great-booking complete!')
-            return render_template('welcome.html', club=club, competitions=competitions)
+    competition['numberOfPlaces'] = int(competition['numberOfPlaces'])-placesRequired
+    flash('Great-booking complete!')
     return render_template('welcome.html', club=club, competitions=competitions)
 
 
