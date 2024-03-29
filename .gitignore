@@ -3,6 +3,6 @@ include
 lib
 .Python
 .vscode
-tests/
+
 .envrc
 __pycache__
